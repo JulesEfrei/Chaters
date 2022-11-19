@@ -1,7 +1,9 @@
 import React from "react";
 
+import { HomeOrganism } from "../organisms";
+
 const HomeScreen: React.FC = () => {
-  return <div>Home Screen</div>;
+  return <HomeOrganism />;
 };
 
 export default HomeScreen;

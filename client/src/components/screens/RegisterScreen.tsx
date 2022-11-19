@@ -1,7 +1,9 @@
 import React from "react";
 
+import { RegisterOrganism } from "../organisms";
+
 const RegisterScreen: React.FC = () => {
-  return <div>Register Screen</div>;
+  return <RegisterOrganism />;
 };
 
 export default RegisterScreen;

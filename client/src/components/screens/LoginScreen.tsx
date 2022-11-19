@@ -1,7 +1,9 @@
 import React from "react";
 
+import { LoginOrganism } from "../organisms";
+
 const LoginScreen: React.FC = () => {
-  return <div>Login Screen</div>;
+  return <LoginOrganism />;
 };
 
 export default LoginScreen;
