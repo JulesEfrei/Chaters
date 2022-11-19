@@ -1,0 +1,29 @@
+@use "../../utils/variables.scss";
+
+//Atom Button Style
+
+.atom-button {
+  border: 2px solid variables.$gray-color;
+  background-color: variables.$white-color;
+  outline: none;
+  color: variables.$gray-color;
+  border-radius: 50px;
+  padding: 5px 40px;
+  font-size: 15px;
+  font-family: variables.$primary-font;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  &:hover,
+  &:active {
+    background-color: variables.$gray-color;
+    color: variables.$white-color;
+    transition: all 0.2s ease;
+  }
+
+  @include variables.cursor();
+}
+
+.animation:has(img) {
+  color: variables.$gray-color;
+}

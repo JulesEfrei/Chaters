@@ -1,3 +1,23 @@
 //Global variables
 
+$black-color: #131313;
+//$gray-color: #a5a5a5;
+$gray-color: #898989;
+$white-color: #fff;
+$white-color2: #f2f2f2;
+$white-bacground: #f6f6f6;
+$info-color: #007ea7;
+$danger-color: #c33149;
+$success-color: #0aaf41;
+
+$input-font: 18px;
+
+$primary-font: "Poppins", sans-serif;
+
 //Global mixins
+
+@mixin cursor() {
+  &:hover {
+    cursor: pointer;
+  }
+}
