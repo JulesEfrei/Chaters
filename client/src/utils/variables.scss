@@ -21,3 +21,9 @@ $primary-font: "Poppins", sans-serif;
     cursor: pointer;
   }
 }
+
+@mixin displayCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

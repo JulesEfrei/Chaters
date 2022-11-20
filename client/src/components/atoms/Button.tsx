@@ -8,10 +8,8 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({ children, onClick }) => {
-  const handleClick: () => void = () => {};
-
   return (
-    <button className="atom-button animation" onClick={handleClick}>
+    <button className="atom-button" onClick={onClick}>
       {children}
     </button>
   );

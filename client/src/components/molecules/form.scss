@@ -1,0 +1,24 @@
+@use "../../utils/variables.scss";
+
+//Molecule form style
+
+.form-container {
+  background-color: variables.$white-bacground;
+  padding: 20px 30px;
+  border-radius: 15px;
+  flex-direction: column;
+
+  @include variables.displayCenter();
+
+  .form-container-title {
+    margin-bottom: 4rem;
+  }
+
+  div {
+    margin-bottom: 1rem;
+  }
+
+  button {
+    margin-top: 2rem;
+  }
+}

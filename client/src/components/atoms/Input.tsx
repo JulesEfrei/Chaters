@@ -1,23 +1,16 @@
 import React from "react";
 
 import "./input.scss";
+import InputType from "../../types/inputType";
 
-interface Props {
-  type: "text" | "email" | "password";
-  handleChange: (value: string) => void;
-  value: string;
-  name: string;
-  label?: string;
-  placeholder?: string;
-}
-
-const Input: React.FC<Props> = ({
+const Input: React.FC<InputType> = ({
   type,
   handleChange,
   value,
   name,
   placeholder = "",
   label = "",
+  errorMsg = "",
 }) => {
   return (
     <>
@@ -32,7 +25,9 @@ const Input: React.FC<Props> = ({
           onChange={(e) => handleChange(e.target.value)}
           className="atom-input"
         />
-        <p className="atom-input-error-msg">{name} is invalid.</p>
+        <p className="atom-input-error-msg">
+          {errorMsg === "" ? `${name} is invalid.` : errorMsg}
+        </p>
       </div>
     </>
   );
