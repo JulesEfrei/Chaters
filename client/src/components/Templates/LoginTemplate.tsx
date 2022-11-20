@@ -6,7 +6,7 @@ import "./loginTemplate.scss";
 
 const LoginTemplate: React.FC = () => {
   const [email, setEmail] = useState("");
-  const [passowrd, setPassword] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="login-template-container">
@@ -15,6 +15,10 @@ const LoginTemplate: React.FC = () => {
         buttonName="Sign In"
         handleSubmit={() => console.log("Click")}
         title="Login"
+        link={{
+          to: "/register",
+          title: "No account?",
+        }}
         input={[
           {
             type: "email",
@@ -27,7 +31,7 @@ const LoginTemplate: React.FC = () => {
           {
             type: "password",
             handleChange: (value) => setPassword(value),
-            value: passowrd,
+            value: password,
             name: "password",
             placeholder: "Password",
           },

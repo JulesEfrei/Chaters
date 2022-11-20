@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Button, Input } from "../atoms/";
 import InputType from "../../types/inputType";
@@ -9,9 +10,16 @@ interface Props {
   handleSubmit: () => void;
   input: Array<InputType>;
   title: string;
+  link?: { to: string; title: string };
 }
 
-const Form: React.FC<Props> = ({ title, buttonName, handleSubmit, input }) => {
+const Form: React.FC<Props> = ({
+  title,
+  buttonName,
+  handleSubmit,
+  input,
+  link,
+}) => {
   return (
     <div className="form-container">
       <>
@@ -31,6 +39,7 @@ const Form: React.FC<Props> = ({ title, buttonName, handleSubmit, input }) => {
           );
         })}
         <Button onClick={handleSubmit}>{buttonName}</Button>
+        {link ? <Link to={link?.to}>{link?.title}</Link> : null}
       </>
     </div>
   );
