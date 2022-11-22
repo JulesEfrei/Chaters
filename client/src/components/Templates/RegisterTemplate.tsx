@@ -5,8 +5,13 @@ import { Link } from "react-router-dom";
 import { Input, Button } from "../atoms/";
 import { Form } from "../molecules";
 import "./registerTemplate.scss";
+import FormTypes from "../../types/formType";
 
-const RegisterTemplate: React.FC = () => {
+interface Props {
+  handleSubmit: (data: FormTypes) => void;
+}
+
+const RegisterTemplate: React.FC<Props> = ({ handleSubmit }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +22,9 @@ const RegisterTemplate: React.FC = () => {
       <img src={require("../../assets/img/logo.png")} />
       <Form
         buttonName="Create Account"
-        handleSubmit={() => console.log("Click")}
+        handleSubmit={() =>
+          handleSubmit({ name, email, password, passwordVerif })
+        }
         title="Register"
         link={{
           to: "/login",

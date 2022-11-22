@@ -24,6 +24,7 @@ const Input: React.FC<InputType> = ({
           value={value}
           onChange={(e) => handleChange(e.target.value)}
           className="atom-input"
+          minLength={type === "password" ? 8 : undefined}
         />
         <p className="atom-input-error-msg">
           {errorMsg === "" ? `${name} is invalid.` : errorMsg}

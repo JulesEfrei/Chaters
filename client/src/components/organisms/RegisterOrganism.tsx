@@ -1,9 +1,28 @@
 import React from "react";
 
 import { RegisterTemplate } from "../Templates/";
+import FormTypes from "../../types/formType";
+import {
+  verifForm,
+  isPassword,
+  generateToast,
+} from "../../utils/formVerification";
 
 const RegisterOrganism: React.FC = () => {
-  return <RegisterTemplate />;
+  const verif = (data: FormTypes) => {
+    if (data.password !== data.passwordVerif) {
+      generateToast("Error !", "error");
+    } else {
+      if (verifForm(data).error.length > 0) {
+        generateToast("Error !", "error");
+      } else {
+        generateToast("Success !", "success");
+        //CONNEXION
+      }
+    }
+  };
+
+  return <RegisterTemplate handleSubmit={(data) => verif(data)} />;
 };
 
 export default RegisterOrganism;
