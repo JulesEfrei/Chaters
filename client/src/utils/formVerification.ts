@@ -55,9 +55,6 @@ export function verifForm(field: field) {
   let error: string[] = [];
 
   Object.keys(field).forEach((elm: string) => {
-    console.log(field[elm]);
-    console.log(valueWithCheck[elm](field[elm]));
-
     if (!!field.elm || !valueWithCheck[elm](field[elm])) {
       result = false;
       error.push(elm);

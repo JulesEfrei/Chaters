@@ -2,11 +2,7 @@ import React from "react";
 
 import { RegisterTemplate } from "../Templates/";
 import FormTypes from "../../types/formType";
-import {
-  verifForm,
-  isPassword,
-  generateToast,
-} from "../../utils/formVerification";
+import { verifForm, generateToast } from "../../utils/formVerification";
 
 const RegisterOrganism: React.FC = () => {
   const verif = (data: FormTypes) => {
@@ -17,7 +13,7 @@ const RegisterOrganism: React.FC = () => {
         generateToast("Error !", "error");
       } else {
         generateToast("Success !", "success");
-        //CONNEXION
+        //CREATE ACCOUNT
       }
     }
   };
