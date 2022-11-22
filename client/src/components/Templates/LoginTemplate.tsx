@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import FormTypes from "../../types/formType";
 
-import { Input, Button } from "../atoms/";
 import { Form } from "../molecules";
 import "./loginTemplate.scss";
 
-const LoginTemplate: React.FC = () => {
+interface Props {
+  handleSubmit: (data: FormTypes) => void;
+}
+
+const LoginTemplate: React.FC<Props> = ({ handleSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +17,7 @@ const LoginTemplate: React.FC = () => {
       <img src={require("../../assets/img/logo.png")} />
       <Form
         buttonName="Sign In"
-        handleSubmit={() => console.log("Click")}
+        handleSubmit={() => handleSubmit({ email, password })}
         title="Login"
         link={{
           to: "/register",
@@ -26,7 +30,7 @@ const LoginTemplate: React.FC = () => {
             value: email,
             name: "Email",
             placeholder: "Email",
-            errorMsg: "Tests",
+            errorMsg: "Email Invalid",
           },
           {
             type: "password",
