@@ -16,7 +16,6 @@ const RegisterOrganism: React.FC = () => {
         generateToast("Error !", "error");
       } else {
         generateToast("Success !", "success");
-        //CREATE ACCOUNT
 
         const req = await fetch(`http://10.3.228.8:8080/auth/register`, {
           method: "POST",
@@ -31,6 +30,8 @@ const RegisterOrganism: React.FC = () => {
           }),
         });
         const res = await req.json();
+
+        //GESTION ERREUR
 
         setTimeout(() => {
           navigate("/login");
