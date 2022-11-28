@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
+require("dotenv").config();
+
 module.exports.connect = function () {
   mongoose
-    .connect("mongodb://localhost:27017/chaters", { useNewUrlParser: true })
+    .connect(process.env.DATABASE_URI, { useNewUrlParser: true })
     .then(() => console.log("Database connected !"))
     .catch((e) => console.log(e));
 };
