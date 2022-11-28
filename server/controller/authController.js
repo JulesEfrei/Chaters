@@ -39,7 +39,7 @@ async function signIn(req, res) {
       expiresIn: 86400, // 24 hours
     });
 
-    res.send({ message: "Sucess!", accessToken: token });
+    res.send({ name: user.name, email: user.email, accessToken: token });
   });
 }
 
