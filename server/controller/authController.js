@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 
 require("dotenv").config();
 
-//Register function (=> Create new User)
 async function newUser(req, res) {
   const newUser = new UserModel({
     name: req.body.name,
@@ -17,9 +16,7 @@ async function newUser(req, res) {
   res.send({ message: "User Created!" });
 }
 
-//Sign In function (=> Generate token)
 async function signIn(req, res) {
-  //Auth userName, password with mongodb
   UserModel.findOne({
     email: req.body.email,
   }).exec((err, user) => {
@@ -29,7 +26,9 @@ async function signIn(req, res) {
 
     const verifPassword = bcrypt.compareSync(req.body.password, user.password);
 
-    //verif if user exist
+    if (!user) {
+      res.status(404).send("User not found");
+    }
 
     if (!verifPassword) {
       res.status(401).send("Password invalid!");
