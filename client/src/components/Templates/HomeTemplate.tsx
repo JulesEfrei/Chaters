@@ -1,7 +1,9 @@
 import React from "react";
 
+import { HotBar } from "../sections";
+
 const HomeTemplate: React.FC = () => {
-  return <div>Home Screen</div>;
+  return <HotBar name="Jules" />;
 };
 
 export default HomeTemplate;
