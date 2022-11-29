@@ -1,9 +1,14 @@
 import React from "react";
 
-import { HotBar } from "../sections";
+import { HotBar, NavBar } from "../sections";
 
 const HomeTemplate: React.FC = () => {
-  return <HotBar name="Jules" />;
+  return (
+    <>
+      <HotBar name="Jules" />
+      <NavBar />
+    </>
+  );
 };
 
 export default HomeTemplate;
