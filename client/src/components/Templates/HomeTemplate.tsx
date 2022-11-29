@@ -1,12 +1,16 @@
 import React from "react";
-
-import { HotBar, NavBar } from "../sections";
+import "./homeTemplate.scss";
+import { HotBar, NavBar, ConvBar, Conversation } from "../sections";
 
 const HomeTemplate: React.FC = () => {
   return (
     <>
       <HotBar name="Jules" />
-      <NavBar />
+      <main>
+        <NavBar />
+        <ConvBar />
+        <Conversation />
+      </main>
     </>
   );
 };

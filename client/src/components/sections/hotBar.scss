@@ -1,6 +1,6 @@
 @use "../../utils/variables.scss";
 
-.molecule-hot-bar {
+.section-hot-bar {
   width: 100vw;
   height: auto;
   border-bottom: 2px solid variables.$gray-color;
@@ -9,7 +9,7 @@
   padding: 10px 0;
 
   .icon-container {
-    width: 200px;
+    width: 300px;
     padding-left: 10px;
   }
 

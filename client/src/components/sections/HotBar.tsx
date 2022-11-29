@@ -9,7 +9,7 @@ interface Props {
 
 const HotBar: React.FC<Props> = ({ name = "" }) => {
   return (
-    <section className="molecule-hot-bar">
+    <section className="section-hot-bar">
       <div className="icon-container">
         <IconButton icon="logo.png" onClick={() => {}} />
       </div>

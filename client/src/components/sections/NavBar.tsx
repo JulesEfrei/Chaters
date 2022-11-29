@@ -7,7 +7,7 @@ interface Props {}
 
 const NavBar: React.FC<Props> = ({}) => {
   return (
-    <section className="molecule-navbar">
+    <section className="section-navbar">
       <div className="top">
         <div>
           <IconButton icon="logo.png" onClick={() => {}} />

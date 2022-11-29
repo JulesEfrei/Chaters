@@ -1,0 +1,48 @@
+@use "../../utils/variables.scss";
+
+.section-conversation {
+  width: calc(100% - 279px);
+  height: calc(100vh - 72px);
+  background-color: variables.$white-bacground;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .msg-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+
+  .input-container {
+    margin: 20px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid variables.$gray-color;
+    border-radius: 50px;
+    background-color: variables.$white-color;
+
+    input {
+      background-color: transparent;
+      border: none;
+      width: 90%;
+      height: 30px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      border-radius: 50px;
+      padding: 10px;
+      border: 1px solid variables.$gray-color;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
