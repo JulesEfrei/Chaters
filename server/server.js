@@ -3,7 +3,6 @@ const cors = require("cors");
 const dbConnection = require("./utils/dbConnection");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
-const { verifyToken } = require("./utils/auth");
 
 require("dotenv").config();
 
@@ -19,7 +18,7 @@ app.get("/", (req, res) => {
   res.send("Hello Word !");
 });
 
-app.use("/user", verifyToken, userRoutes);
+app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
 
 app.listen(PORT, () => console.log(`Server is running... on ${PORT} port`));

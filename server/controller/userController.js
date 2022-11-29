@@ -11,8 +11,7 @@ async function getOne(req, res) {
     const user = await UserModel.find({ _id: req.params.id });
     res.send(user);
   } catch {
-    res.status(404);
-    res.send({ error: "User doesn't exist!" });
+    res.status(404).send({ error: "User doesn't exist!" });
   }
 }
 
@@ -21,8 +20,7 @@ async function deleteOne(req, res) {
     await UserModel.deleteOne({ _id: req.params.id });
     res.status(204).send("User deleted!");
   } catch {
-    res.status(404);
-    res.send({ error: "User doesn't exist!" });
+    res.status(404).send({ error: "User doesn't exist!" });
   }
 }
 
@@ -45,8 +43,7 @@ async function updateOne(req, res) {
     await user.save();
     res.send(user);
   } catch {
-    res.status(404);
-    res.send({ error: "User doesn't exist!" });
+    res.status(404).send({ error: "User doesn't exist!" });
   }
 }
 
