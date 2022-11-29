@@ -15,27 +15,39 @@ const RegisterOrganism: React.FC = () => {
       if (verifForm(data).error.length > 0) {
         generateToast("Error !", "error");
       } else {
-        generateToast("Success !", "success");
+        try {
+          //Try fetch
+          const req = await fetch(`http://localhost:8080/auth/register`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: data.name,
+              email: data.email,
+              password: data.password,
+            }),
+          });
 
-        const req = await fetch(`http://10.3.228.8:8080/auth/register`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: data.name,
-            email: data.email,
-            password: data.password,
-          }),
-        });
-        const res = await req.json();
+          //Get response
+          const res = await req.json();
 
-        //GESTION ERREUR
+          //Status code 400-499
+          if (!req.ok) {
+            throw new Error(JSON.stringify(res));
+          } else {
+            //Status code 200-299
+            generateToast("User Created!", "success");
 
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
+            //Navigate login page
+            setTimeout(() => {
+              navigate("/login");
+            }, 2000);
+          }
+        } catch (err: any) {
+          generateToast(JSON.parse(err.message).error, "error");
+        }
       }
     }
   };
