@@ -26,9 +26,17 @@ async function newUser(req, res) {
     password: bcrypt.hashSync(req.body.password, 10),
   });
 
-  await newUser.save();
-
-  res.status(200).send({ success: "User Created!" });
+  try {
+    let user = await UserModel.findOne({ email: req.body.email });
+    if (user) {
+      res.status(400).send({ error: "Email already registered." });
+    } else {
+      await newUser.save();
+      res.status(200).send({ success: "User Created!" });
+    }
+  } catch (err) {
+    res.status(400).send({ error: err });
+  }
 }
 
 async function signIn(req, res) {
