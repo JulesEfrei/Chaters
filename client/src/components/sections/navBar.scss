@@ -1,0 +1,41 @@
+@use "../../utils/variables.scss";
+
+.section-navbar {
+  width: 50px;
+  height: calc(100vh - 72px);
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-right: 2px solid variables.$gray-color;
+
+  .top,
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    height: 45vh;
+  }
+
+  .top {
+    justify-content: flex-start;
+    padding-top: 100px;
+
+    div:nth-child(1) {
+      margin-bottom: 1rem;
+    }
+
+    div:nth-child(2) {
+      margin-bottom: 0.5rem;
+    }
+
+    div:nth-child(3) {
+      padding-top: 0.5rem;
+      border-top: 2px solid variables.$gray-color;
+    }
+  }
+
+  .bottom {
+    justify-content: flex-end;
+    padding-bottom: 100px;
+  }
+}
