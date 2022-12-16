@@ -9,7 +9,7 @@ interface Props {
 
 const ConvBlock: React.FC<Props> = ({ name, selected = false, onClick }) => {
   return (
-    <div className="molecule-conv-block">
+    <div className="molecule-conv-block" onClick={onClick}>
       <h3>{name}</h3>
     </div>
   );
