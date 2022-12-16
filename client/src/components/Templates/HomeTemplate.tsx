@@ -10,6 +10,7 @@ interface Props {
   actualConv: convData;
   msgList: msgData[];
   send: (msg: msgData) => void;
+  newConv: (data: { user1: string; user2: string }) => void;
 }
 
 const HomeTemplate: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const HomeTemplate: React.FC<Props> = ({
   actualConv,
   msgList,
   send,
+  newConv,
 }) => {
   return (
     <>
@@ -27,6 +29,7 @@ const HomeTemplate: React.FC<Props> = ({
         <ConvBar
           convList={convList}
           onClick={(convData: convData) => updateActualConv(convData)}
+          newConv={(data: { user1: string; user2: string }) => newConv(data)}
         />
         {Object.values(actualConv).length !== 0 ? (
           <Conversation

@@ -10,7 +10,11 @@ const HomeOrganism: React.FC = () => {
   const [actualConv, setActualConv] = useState<convData>({});
   const [conv, setConv] = useState<
     { convId: string; user1: string; user2: string }[]
-  >(JSON.parse(localStorage.getItem("conversation")!));
+  >(
+    JSON.parse(localStorage.getItem("conversation")!)
+      ? JSON.parse(localStorage.getItem("conversation")!)
+      : []
+  );
 
   //Socket.io
   const socket = io("http://localhost:8081"); //API Url
@@ -50,8 +54,18 @@ const HomeOrganism: React.FC = () => {
 
     const res = await req.json();
 
-    setConv([...conv, res]);
-    localStorage.setItem("conversation", JSON.stringify([...conv]));
+    console.log(res);
+
+    addConv(res);
+    const temp = [
+      ...conv,
+      {
+        user1: res.user1,
+        user2: res.user2,
+        convId: res._id,
+      },
+    ];
+    localStorage.setItem("conversation", JSON.stringify([...temp]));
   };
 
   const getMsgList: (convId: string) => void = async (convId) => {
@@ -81,6 +95,20 @@ const HomeOrganism: React.FC = () => {
     [actualMsgList]
   );
 
+  const addConv = useCallback(
+    (convData: { user1: string; user2: string; _id: string }) => {
+      setConv((last) => [
+        ...last,
+        {
+          user1: convData.user1,
+          user2: convData.user2,
+          convId: convData._id,
+        },
+      ]);
+    },
+    [conv]
+  );
+
   const updateAll = useCallback(
     (convData: convData) => {
       setActualConv((last) => convData);
@@ -93,6 +121,7 @@ const HomeOrganism: React.FC = () => {
   return (
     <HomeTemplate
       convList={conv}
+      newConv={(data: { user1: string; user2: string }) => newConv(data)}
       updateActualConv={(convData: convData) => {
         updateAll(convData);
       }}
