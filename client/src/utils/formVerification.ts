@@ -68,7 +68,7 @@ type position = "top-right" | "top-left" | "bottom-right" | "bottom-left";
 
 export function generateToast(
   text: string,
-  type: "error" | "success" = "error",
+  type: "error" | "success" | "info" = "error",
   position: position = "top-right"
 ) {
   toast[type](text, {
