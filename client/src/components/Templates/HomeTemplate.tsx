@@ -23,7 +23,13 @@ const HomeTemplate: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <HotBar name={actualConv.user2!} />
+      <HotBar
+        name={
+          JSON.parse(localStorage.getItem("data")!).email == actualConv.user1
+            ? actualConv.user2!
+            : actualConv.user1!
+        }
+      />
       <main>
         <NavBar />
         <ConvBar

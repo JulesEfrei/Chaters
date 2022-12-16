@@ -35,7 +35,11 @@ const ConvBar: React.FC<Props> = ({ convList, onClick, newConv }) => {
         ? convList.map((elm, index) => {
             return (
               <ConvBlock
-                name={elm.user2!}
+                name={
+                  JSON.parse(localStorage.getItem("data")!).email == elm.user1
+                    ? elm.user2!
+                    : elm.user1!
+                }
                 selected={false}
                 onClick={() => onClick(elm)}
                 key={elm.convId}

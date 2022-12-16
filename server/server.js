@@ -6,6 +6,8 @@ const authRoutes = require("./routes/authRoutes");
 const msgRoutes = require("./routes/msgRoutes");
 const convRoutes = require("./routes/convRoutes");
 const MsgModel = require("./model/msgModel");
+const UserModel = require("./model/userModel");
+const ConvModel = require("./model/convModel");
 
 const httpServer = require("http").createServer();
 const io = require("socket.io")(httpServer, {
@@ -65,5 +67,16 @@ app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/msg", msgRoutes);
 app.use("/conv", convRoutes);
+
+app.get("/clear-all", async (req, res) => {
+  try {
+    const removeMsg = await MsgModel.deleteMany({});
+    const removeUser = await UserModel.deleteMany({});
+    const removeConv = await ConvModel.deleteMany({});
+    res.status(200).send("Database Cleared!");
+  } catch (err) {
+    res.status(400).send({ error: err });
+  }
+});
 
 app.listen(PORT, () => console.log(`Server is running... on ${PORT} port`));
