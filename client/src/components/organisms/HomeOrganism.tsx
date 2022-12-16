@@ -6,7 +6,7 @@ import msgData from "../../types/msgType";
 import { HomeTemplate } from "../Templates/";
 
 const HomeOrganism: React.FC = () => {
-  const [actualMsgList, setActualMsgList] = useState<msgData[]>([]);
+  let [actualMsgList, setActualMsgList] = useState<msgData[]>([]);
   const [actualConv, setActualConv] = useState<convData>({});
   const [conv, setConv] = useState<
     { convId: string; user1: string; user2: string }[]
@@ -19,7 +19,7 @@ const HomeOrganism: React.FC = () => {
     console.log("Connected from Client : ", socket.id);
 
     socket.on("msg", (data) => {
-      console.log(data);
+      addMsgList(data);
     });
   });
 
@@ -67,17 +67,24 @@ const HomeOrganism: React.FC = () => {
     setActualMsgList(res);
   };
 
-  const updateMsgLIst = useCallback(
+  const updateMsgList = useCallback(
     (convData: convData) => {
       getMsgList(convData.convId!);
     },
     [actualMsgList]
   );
 
+  const addMsgList = useCallback(
+    (msg: msgData) => {
+      setActualMsgList((last) => [...last, msg]);
+    },
+    [actualMsgList]
+  );
+
   const updateAll = useCallback(
     (convData: convData) => {
-      setActualConv(convData);
-      updateMsgLIst(convData);
+      setActualConv((last) => convData);
+      updateMsgList(convData);
       roomChange(convData.convId!);
     },
     [actualConv, actualMsgList]

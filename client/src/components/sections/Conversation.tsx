@@ -26,6 +26,7 @@ const Conversation: React.FC<Props> = ({ msgList, sendMsg, convData }) => {
             : convData.user1!,
         convId: convData.convId!,
       });
+      setValue("");
     } else {
       console.log("NON");
     }
@@ -47,7 +48,7 @@ const Conversation: React.FC<Props> = ({ msgList, sendMsg, convData }) => {
                       : "msg-sended"
                   }
                   date={elm.date!}
-                  key={`${elm.date}-msg`}
+                  key={`${elm.date}-msg-${index}`}
                 />
               );
             })

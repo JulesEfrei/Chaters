@@ -3,7 +3,6 @@ import "./homeTemplate.scss";
 import { HotBar, NavBar, ConvBar, Conversation } from "../sections";
 import convData from "../../types/convDataType";
 import msgData from "../../types/msgType";
-import { send } from "process";
 
 interface Props {
   convList: convData[];
