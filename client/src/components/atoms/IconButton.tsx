@@ -5,11 +5,15 @@ import "./iconButton.scss";
 interface Props {
   icon: string;
   onClick: () => void;
+  active?: boolean;
 }
 
-const IconButton: React.FC<Props> = ({ icon, onClick }) => {
+const IconButton: React.FC<Props> = ({ icon, onClick, active = false }) => {
   return (
-    <button className="atom-icon-button" onClick={onClick}>
+    <button
+      className={`atom-icon-button ${active && "active"}`}
+      onClick={onClick}
+    >
       <img src={require(`../../assets/img/${icon}`)} alt="Icon" />
     </button>
   );

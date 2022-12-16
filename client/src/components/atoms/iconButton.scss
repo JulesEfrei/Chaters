@@ -3,7 +3,7 @@
 .atom-icon-button {
   width: 50px;
   height: 50px;
-  background-color: variables.$gray-color;
+  background-color: variables.$white-bacground;
   border-radius: 50%;
   border: none;
   padding: 10px;
@@ -16,4 +16,8 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.active {
+  background-color: variables.$gray-background;
 }
