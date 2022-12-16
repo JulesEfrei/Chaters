@@ -5,6 +5,10 @@
   border-bottom: 1px solid variables.$gray-color;
   border-top: 1px solid variables.$gray-color;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   h3 {
     margin: 0;
     padding: 30px 10px;

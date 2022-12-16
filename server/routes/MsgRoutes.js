@@ -4,7 +4,7 @@ const { verifyToken } = require("../utils/auth");
 
 const router = express.Router();
 
-router.get("/clear", (req, res) => msgController.clear(req, res));
+router.get("/clear", (req, res) => msgController.clear(res));
 
 router
   .route("/:convId")

@@ -10,6 +10,8 @@ async function getMsg(req, res) {
 }
 
 async function newMsg(req, res) {
+  console.log(req.body);
+  console.log(req.params);
   try {
     const msg = new MsgModel({
       sender: req.body.sender,
@@ -28,7 +30,7 @@ async function newMsg(req, res) {
 async function clear(res) {
   try {
     const remove = await MsgModel.deleteMany({});
-    res.status(200);
+    res.status(200).send("Sucess!");
   } catch (err) {
     res.status(400).send({ error: "Aïe. Problème." });
   }

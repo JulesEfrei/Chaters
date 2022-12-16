@@ -29,7 +29,11 @@ async function newConv(req, res) {
       res.status(201).send({ convId: conv.id });
     });
   } else {
-    res.status(200).send("C'est la rue pour l'instant");
+    const getConv = await ConvModel.findOne({
+      user1: req.body.user1,
+      user2: req.body.user2,
+    });
+    res.status(200).send(getConv);
   }
 }
 
