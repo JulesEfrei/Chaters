@@ -1,0 +1,52 @@
+@use "../../utils/variables.scss";
+
+//Atom Input Style
+
+.atom-input-container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  font-family: variables.$primary-font;
+
+  &:has(:invalid:not(:focus)) .atom-input-error-msg {
+    display: inline-block;
+  }
+}
+
+.atom-input {
+  outline: none;
+  border-radius: 7px;
+  border: 2px solid variables.$gray-color;
+  font-size: variables.$input-font;
+  padding: 5px 10px;
+  width: 20rem;
+
+  &::placeholder {
+    color: variables.$gray-color;
+  }
+
+  &:focus {
+    border-color: variables.$info-color;
+  }
+
+  &:invalid:not(:focus) {
+    border-color: variables.$danger-color;
+  }
+
+  &:valid:not(:focus):not([value=""]) {
+    border-color: variables.$success-color;
+  }
+}
+
+.atom-input-label {
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.atom-input-error-msg {
+  font-size: 12px;
+  color: variables.$danger-color;
+  margin-top: 10px;
+  margin-bottom: 0;
+  display: none;
+}

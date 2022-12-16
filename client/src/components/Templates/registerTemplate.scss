@@ -1,0 +1,15 @@
+@use "../../utils/variables.scss";
+
+//Login template style
+
+.register-template-container {
+  width: 100vw;
+  height: 100vh;
+  @include variables.displayCenter();
+  flex-direction: column;
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
+}

@@ -1,0 +1,20 @@
+@use "../../utils/variables.scss";
+
+.molecule-conv-block {
+  width: 100%;
+  border-bottom: 1px solid variables.$gray-color;
+  border-top: 1px solid variables.$gray-color;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  h3 {
+    margin: 0;
+    padding: 30px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: variables.$primary-font;
+    letter-spacing: 0.5px;
+  }
+}

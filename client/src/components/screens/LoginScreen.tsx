@@ -1,7 +1,15 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
+
+import { LoginOrganism } from "../organisms";
 
 const LoginScreen: React.FC = () => {
-  return <div>Login Screen</div>;
+  return (
+    <>
+      <LoginOrganism />
+      <ToastContainer />
+    </>
+  );
 };
 
 export default LoginScreen;

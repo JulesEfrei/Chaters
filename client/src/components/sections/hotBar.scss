@@ -1,0 +1,28 @@
+@use "../../utils/variables.scss";
+
+.section-hot-bar {
+  width: 100vw;
+  height: auto;
+  border-bottom: 2px solid variables.$gray-color;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+
+  .icon-container {
+    width: 300px;
+    padding-left: 10px;
+  }
+
+  .title-container {
+    width: calc(100% - 200px);
+
+    h1 {
+      border-left: 2px solid variables.$gray-color;
+      padding: 10px 20px;
+    }
+  }
+
+  h1 {
+    margin: 0;
+  }
+}
