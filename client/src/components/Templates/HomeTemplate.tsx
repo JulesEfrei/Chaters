@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./homeTemplate.scss";
 import { HotBar, NavBar, ConvBar, Conversation } from "../sections";
 import convData from "../../types/convDataType";
@@ -11,6 +11,7 @@ interface Props {
   msgList: msgData[];
   send: (msg: msgData) => void;
   newConv: (data: { user1: string; user2: string }) => void;
+  logout: () => void;
 }
 
 const HomeTemplate: React.FC<Props> = ({
@@ -20,18 +21,19 @@ const HomeTemplate: React.FC<Props> = ({
   msgList,
   send,
   newConv,
+  logout,
 }) => {
   return (
     <>
       <HotBar
         name={
-          JSON.parse(localStorage.getItem("data")!).email == actualConv.user1
+          JSON.parse(localStorage.getItem("data")!).email === actualConv.user1
             ? actualConv.user2!
             : actualConv.user1!
         }
       />
       <main>
-        <NavBar />
+        <NavBar logoutState={logout} />
         <ConvBar
           convList={convList}
           onClick={(convData: convData) => updateActualConv(convData)}

@@ -5,7 +5,9 @@ import { generateToast, verifForm } from "../../utils/formVerification";
 
 import { LoginTemplate } from "../Templates/";
 
-const LoginOrganism: React.FC = () => {
+const LoginOrganism: React.FC<{ loginState: () => void }> = ({
+  loginState,
+}) => {
   const navigate = useNavigate();
 
   const verif = async (data: FormTypes) => {
@@ -32,6 +34,7 @@ const LoginOrganism: React.FC = () => {
           generateToast("Successful connection", "success");
 
           localStorage.setItem("data", JSON.stringify(res));
+          loginState();
 
           setTimeout(() => {
             navigate("/home");
