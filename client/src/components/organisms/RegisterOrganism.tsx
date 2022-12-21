@@ -13,7 +13,7 @@ const RegisterOrganism: React.FC = () => {
       generateToast("Error !", "error");
     } else {
       if (verifForm(data).error.length > 0) {
-        generateToast("Error !", "error");
+        generateToast("Invalid Form!", "error");
       } else {
         try {
           //Try fetch

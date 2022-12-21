@@ -16,10 +16,10 @@
 .atom-input {
   outline: none;
   border-radius: 7px;
-  border: 2px solid variables.$gray-color;
+  border: 1px solid variables.$gray-color;
   font-size: variables.$input-font;
-  padding: 5px 10px;
-  width: 20rem;
+  padding: 7px 10px;
+  width: 25rem;
 
   &::placeholder {
     color: variables.$gray-color;
