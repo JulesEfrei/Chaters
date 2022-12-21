@@ -3,6 +3,7 @@ import "./convBar.scss";
 import { ConvBlock } from "../molecules/";
 import convData from "../../types/convDataType";
 import { Button, Input } from "../atoms/";
+import { generateToast } from "../../utils/formVerification";
 
 interface Props {
   convList: convData[];
@@ -28,7 +29,7 @@ const ConvBar: React.FC<Props> = ({
       });
       setShow(false);
     } else {
-      console.log("ERROR => Mail empty");
+      generateToast("Mail invalid!", "error");
     }
   };
 
@@ -57,17 +58,21 @@ const ConvBar: React.FC<Props> = ({
           })
         : null}
       {show === true ? (
-        <div className="modal">
-          <h1>Who do you want to start a conversation with?</h1>
-          <Input
-            value={mail}
-            handleChange={(value) => setMail(value)}
-            type="email"
-            name="Email"
-            placeholder="Person's Email"
-          />
-          <button onClick={() => handleClick()}>Start Chatting!</button>
-          <button onClick={() => setShow(false)}></button>
+        <div className="modal-container">
+          <div className="modal">
+            <h1>Start a conversation with?</h1>
+            <Input
+              value={mail}
+              handleChange={(value) => setMail(value)}
+              type="email"
+              name="Email"
+              label="Person's Email"
+            />
+            <div className="button-container">
+              <Button onClick={() => handleClick()}>Start Chatting!</Button>
+              <Button onClick={() => setShow(false)}>Cancel</Button>
+            </div>
+          </div>
         </div>
       ) : null}
     </section>
