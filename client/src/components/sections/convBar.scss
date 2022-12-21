@@ -6,9 +6,19 @@
   overflow-y: scroll;
   border-right: 2px solid variables.$gray-color;
 
-  .button-container {
-    padding: 20px 10px;
-    @include variables.displayCenter();
+  .top-content {
+    .button-container {
+      padding: 20px 10px;
+      @include variables.displayCenter();
+      button {
+        min-width: 0 !important;
+      }
+    }
+
+    p {
+      padding-left: 10px;
+      font-size: 14px;
+    }
   }
 
   .modal {

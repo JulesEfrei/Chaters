@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import "./convBar.scss";
 import { ConvBlock } from "../molecules/";
 import convData from "../../types/convDataType";
-import { Input } from "../atoms/";
+import { Button, Input } from "../atoms/";
 
 interface Props {
   convList: convData[];
   onClick: (convData: convData) => void;
   newConv: (data: { user1: string; user2: string }) => void;
+  actualConv: convData;
 }
 
-const ConvBar: React.FC<Props> = ({ convList, onClick, newConv }) => {
+const ConvBar: React.FC<Props> = ({
+  convList,
+  onClick,
+  newConv,
+  actualConv,
+}) => {
   const [show, setShow] = useState<Boolean>(false);
   const [mail, setMail] = useState<string>("");
 
@@ -28,8 +34,11 @@ const ConvBar: React.FC<Props> = ({ convList, onClick, newConv }) => {
 
   return (
     <section className="section-conv-bar">
-      <div className="button-container">
-        <button onClick={() => setShow(true)}>New Conversation</button>
+      <div className="top-content">
+        <div className="button-container">
+          <Button onClick={() => setShow(true)}>New Conversation</Button>
+        </div>
+        <p>All Message</p>
       </div>
       {convList !== null
         ? convList.map((elm, index) => {
@@ -40,7 +49,7 @@ const ConvBar: React.FC<Props> = ({ convList, onClick, newConv }) => {
                     ? elm.user2!
                     : elm.user1!
                 }
-                selected={false}
+                selected={actualConv === elm ? true : false}
                 onClick={() => onClick(elm)}
                 key={elm.convId}
               />

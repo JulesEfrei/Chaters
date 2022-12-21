@@ -30,3 +30,12 @@ $primary-font: "Poppins", sans-serif;
   justify-content: center;
   align-items: center;
 }
+
+@mixin linearGradient($opacity: 1, $rotate: 90deg) {
+  background: rgb(224, 199, 255);
+  background: linear-gradient(
+    $rotate,
+    rgba(224, 199, 255, $opacity) 0%,
+    rgba(105, 186, 240, $opacity) 100%
+  );
+}
