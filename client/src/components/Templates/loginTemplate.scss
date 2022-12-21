@@ -5,11 +5,58 @@
 .login-template-container {
   width: 100vw;
   height: 100vh;
-  @include variables.displayCenter();
-  flex-direction: column;
 
-  img {
-    width: 200px;
-    height: 200px;
+  .presentation {
+    width: 50vw;
+    height: 100vh;
+    background: rgb(224, 199, 255);
+    background: conic-gradient(
+      rgba(224, 199, 255, 1) 15%,
+      rgba(105, 186, 240, 1) 50%,
+      rgba(224, 199, 255, 1) 95%
+    );
+    @include variables.displayCenter();
+
+    .content {
+      padding: 100px 50px;
+      background-color: rgba(255, 255, 255, 0.2);
+      width: 65%;
+
+      h1 {
+        font-size: 60px;
+        letter-spacing: 2px;
+        width: 80%;
+        margin-bottom: 5rem;
+        margin-top: 0;
+
+        span {
+          color: black;
+        }
+      }
+
+      h1,
+      h3 {
+        color: white;
+      }
+    }
+  }
+
+  .right-container {
+    width: 50vw;
+    height: 100vh;
+    @include variables.displayCenter();
+    flex-direction: column;
+
+    .title {
+      margin: 0;
+      padding-left: 30px;
+    }
+
+    img {
+      padding-left: 30px;
+      width: 75px;
+      height: 75px;
+      margin-bottom: 1.5rem;
+    }
   }
 }

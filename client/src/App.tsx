@@ -1,26 +1,11 @@
 import "./App.scss";
-import { Routes, Route } from "react-router-dom";
-import {
-  HomeScreen,
-  LoginScreen,
-  RegisterScreen,
-  ErrorScreen,
-} from "./components/screens/";
+import RootNavigation from "./router/RootNavigation";
 
 function App() {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          localStorage.getItem("data") ? <HomeScreen /> : <LoginScreen />
-        }
-      />
-      <Route path="/home" element={<HomeScreen />} />
-      <Route path="/login" element={<LoginScreen />} />
-      <Route path="/register" element={<RegisterScreen />} />
-      <Route path="/*" element={<ErrorScreen />} />
-    </Routes>
+    <>
+      <RootNavigation />
+    </>
   );
 }
 

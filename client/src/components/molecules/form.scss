@@ -3,23 +3,40 @@
 //Molecule form style
 
 .form-container {
-  background-color: variables.$white-bacground;
-  padding: 20px 30px;
+  padding: 0 30px 20px 30px;
   border-radius: 15px;
   flex-direction: column;
 
   @include variables.displayCenter();
 
   .form-container-title {
+    margin-top: 0;
     margin-bottom: 4rem;
+    align-self: flex-start;
   }
 
   div {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 
   button {
     margin-top: 2rem;
     margin-bottom: 1rem;
+  }
+
+  a:link {
+    background: rgb(224, 199, 255);
+    background-clip: text;
+    background: linear-gradient(
+      90deg,
+      rgba(224, 199, 255, 1) 0%,
+      rgba(105, 186, 240, 1) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  a:hover {
+    border-bottom: 1px solid #e0c7ff;
   }
 }

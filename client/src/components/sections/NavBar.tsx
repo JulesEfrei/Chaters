@@ -4,13 +4,16 @@ import { generateToast } from "../../utils/formVerification";
 import { IconButton } from "../atoms";
 import "./navBar.scss";
 
-interface Props {}
+interface Props {
+  logoutState: () => void;
+}
 
-const NavBar: React.FC<Props> = ({}) => {
+const NavBar: React.FC<Props> = ({ logoutState }) => {
   const navigation = useNavigate();
 
   const logout: () => void = () => {
     localStorage.clear();
+    logoutState();
     navigation("/login");
   };
 
