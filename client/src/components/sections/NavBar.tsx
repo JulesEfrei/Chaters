@@ -23,22 +23,22 @@ const NavBar: React.FC<Props> = ({ logoutState }) => {
     <section className="section-navbar">
       <div className="top">
         <div>
-          <IconButton icon="msg.png" active={true} onClick={() => {}} />
+          <IconButton icon="msg.svg" active={true} onClick={() => {}} />
         </div>
         <div>
           <IconButton
-            icon="setting.png"
+            icon="setting.svg"
             onClick={() =>
               generateToast("Features does not exist yet.", "info")
             }
           />
         </div>
         <div>
-          <IconButton icon="logout.png" onClick={() => logout()} />
+          <IconButton icon="logout.svg" onClick={() => logout()} />
         </div>
       </div>
       <div className="bottom">
-        <IconButton icon="user.png" onClick={() => setShowUser(!showUser)} />
+        <IconButton icon="user.svg" onClick={() => setShowUser(!showUser)} />
         {showUser ? (
           <div className="user-info">
             <h2>User's information</h2>
