@@ -1,7 +1,7 @@
 @use "../../utils/variables.scss";
 
 .section-conv-bar {
-  width: 207px;
+  width: 215px;
   height: calc(100vh - 72px);
   overflow-y: scroll;
   border-right: 2px solid variables.$gray-color;

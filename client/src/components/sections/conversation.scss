@@ -1,12 +1,24 @@
 @use "../../utils/variables.scss";
 
 .section-conversation {
+  position: relative;
+  z-index: 100;
   width: calc(100% - 279px);
   height: calc(100vh - 72px);
   background-color: variables.$white-background;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  .scrolling-section {
+    overflow-y: scroll;
+    overflow-anchor: none;
+  }
+
+  #anchor-scroll {
+    overflow-anchor: auto;
+    height: 1px;
+  }
 
   .msg-wrapper {
     display: flex;
@@ -20,8 +32,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid variables.$gray-color;
-    border-radius: 50px;
+    border-radius: 10px;
     background-color: variables.$white-color;
 
     input {
@@ -36,13 +47,9 @@
     }
 
     button {
-      border-radius: 50px;
-      padding: 10px;
-      border: 1px solid variables.$gray-color;
-
-      &:hover {
-        cursor: pointer;
-      }
+      background-color: transparent;
+      filter: brightness(0) saturate(100%) invert(66%) sepia(82%) saturate(548%)
+        hue-rotate(175deg) brightness(96%) contrast(97%);
     }
   }
 }

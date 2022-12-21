@@ -45,7 +45,7 @@ const ConvBar: React.FC<Props> = ({
             return (
               <ConvBlock
                 name={
-                  JSON.parse(localStorage.getItem("data")!).email == elm.user1
+                  JSON.parse(localStorage.getItem("data")!).email === elm.user1
                     ? elm.user2!
                     : elm.user1!
                 }
