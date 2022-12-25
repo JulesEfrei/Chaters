@@ -1,9 +1,8 @@
-export default interface InputType {
-  type: "text" | "email" | "password";
-  handleChange: (value: string) => void;
-  value: string;
-  name: string;
-  label?: string;
+import React from "react";
+
+export default interface InputType
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string; //Replace label attribute in optional attribute
   placeholder?: string;
   errorMsg?: string;
 }

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import "./conversation.scss";
 import { Msg } from "../molecules/";
 import msgType from "../../types/msgType";
@@ -12,22 +12,27 @@ interface Props {
 }
 
 const Conversation: React.FC<Props> = ({ msgList, sendMsg, convData }) => {
-  const [value, setValue] = useState("");
+  const inputValue = useRef<HTMLInputElement>(null);
 
   const send: () => void = () => {
-    if (value !== "") {
-      sendMsg({
-        sender: JSON.parse(localStorage.getItem("data")!).email,
-        content: value,
-        receiver:
-          convData.user1 === JSON.parse(localStorage.getItem("data")!).email
-            ? convData.user2!
-            : convData.user1!,
-        convId: convData.convId!,
-      });
-      setValue("");
+    if (inputValue.current) {
+      console.log(inputValue.current.value);
+      if (inputValue.current.value !== "") {
+        sendMsg({
+          sender: JSON.parse(localStorage.getItem("data")!).email,
+          content: inputValue.current.value,
+          receiver:
+            convData.user1 === JSON.parse(localStorage.getItem("data")!).email
+              ? convData.user2!
+              : convData.user1!,
+          convId: convData.convId!,
+        });
+        inputValue.current.value = "";
+      } else {
+        return;
+      }
     } else {
-      console.log("NON");
+      console.log("No current");
     }
   };
 
@@ -74,8 +79,8 @@ const Conversation: React.FC<Props> = ({ msgList, sendMsg, convData }) => {
         <input
           type="text"
           placeholder="Start chatting"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          // value={inputValue.current.value}
+          ref={inputValue}
         />
         <IconButton onClick={() => send()} icon="send.png" />
       </div>

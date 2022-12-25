@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./convBar.scss";
 import { ConvBlock } from "../molecules/";
 import convData from "../../types/convDataType";
@@ -19,17 +19,19 @@ const ConvBar: React.FC<Props> = ({
   actualConv,
 }) => {
   const [show, setShow] = useState<Boolean>(false);
-  const [mail, setMail] = useState<string>("");
+  const mail = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
-    if (mail !== "") {
-      newConv({
-        user1: JSON.parse(localStorage.getItem("data")!).email,
-        user2: mail,
-      });
-      setShow(false);
-    } else {
-      generateToast("Mail invalid!", "error");
+    if (mail.current) {
+      if (mail.current.value !== "") {
+        newConv({
+          user1: JSON.parse(localStorage.getItem("data")!).email,
+          user2: mail.current.value,
+        });
+        setShow(false);
+      } else {
+        generateToast("Mail invalid!", "error");
+      }
     }
   };
 
@@ -62,11 +64,11 @@ const ConvBar: React.FC<Props> = ({
           <div className="modal">
             <h1>Start a conversation with?</h1>
             <Input
-              value={mail}
-              handleChange={(value) => setMail(value)}
+              value={mail.current?.value}
               type="email"
               name="Email"
               label="Person's Email"
+              ref={mail}
             />
             <div className="button-container">
               <Button onClick={() => handleClick()}>Start Chatting!</Button>
