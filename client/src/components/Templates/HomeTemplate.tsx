@@ -36,6 +36,7 @@ const HomeTemplate: React.FC<Props> = ({
         <NavBar logoutState={logout} />
         <ConvBar
           convList={convList}
+          actualConv={actualConv}
           onClick={(convData: convData) => updateActualConv(convData)}
           newConv={(data: { user1: string; user2: string }) => newConv(data)}
         />

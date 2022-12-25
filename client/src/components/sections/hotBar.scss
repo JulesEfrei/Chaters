@@ -1,6 +1,9 @@
 @use "../../utils/variables.scss";
 
 .section-hot-bar {
+  position: relative;
+  background-color: white;
+  z-index: 10;
   width: 100vw;
   height: auto;
   border-bottom: 2px solid variables.$gray-color;
