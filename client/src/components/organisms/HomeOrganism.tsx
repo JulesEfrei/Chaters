@@ -54,8 +54,6 @@ const HomeOrganism: React.FC<{ logout: () => void }> = ({ logout }) => {
 
     const res = await req.json();
 
-    console.log(res);
-
     addConv(res);
     const temp = [
       ...conv,
