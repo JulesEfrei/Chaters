@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useRef } from "react";
 import { Form } from "../molecules";
 import "./registerTemplate.scss";
 import FormTypes from "../../types/formType";
@@ -9,10 +8,10 @@ interface Props {
 }
 
 const RegisterTemplate: React.FC<Props> = ({ handleSubmit }) => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVerif, setPasswordVerif] = useState("");
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+  const passwordVerif = useRef<HTMLInputElement>(null);
+  const name = useRef<HTMLInputElement>(null);
 
   return (
     <main className="register-template-container">
@@ -32,7 +31,12 @@ const RegisterTemplate: React.FC<Props> = ({ handleSubmit }) => {
           <Form
             buttonName="Create Account"
             handleSubmit={() =>
-              handleSubmit({ name, email, password, passwordVerif })
+              handleSubmit({
+                name: name.current!.value,
+                email: email.current!.value,
+                password: password.current!.value,
+                passwordVerif: passwordVerif.current!.value,
+              })
             }
             title="Register"
             link={{
@@ -42,32 +46,32 @@ const RegisterTemplate: React.FC<Props> = ({ handleSubmit }) => {
             input={[
               {
                 type: "email",
-                handleChange: (value) => setEmail(value),
-                value: email,
+                value: email.current ? email.current.value : "",
                 name: "Email",
                 label: "Email",
+                ref: email,
               },
               {
                 type: "text",
-                handleChange: (value) => setName(value),
-                value: name,
+                value: name.current ? name.current.value : "",
                 name: "Name",
                 label: "Name",
+                ref: name,
               },
               {
                 type: "password",
-                handleChange: (value) => setPassword(value),
-                value: password,
+                value: password.current ? password.current.value : "",
                 name: "password",
                 label: "Password",
+                ref: password,
               },
               {
                 type: "password",
-                handleChange: (value) => setPasswordVerif(value),
-                value: passwordVerif,
+                value: passwordVerif.current ? passwordVerif.current.value : "",
                 name: "password",
                 label: "Confirm Password",
                 errorMsg: "Not the same password !",
+                ref: passwordVerif,
               },
             ]}
           />

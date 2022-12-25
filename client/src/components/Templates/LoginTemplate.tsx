@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import FormTypes from "../../types/formType";
 
 import { Form } from "../molecules";
@@ -9,8 +9,8 @@ interface Props {
 }
 
 const LoginTemplate: React.FC<Props> = ({ handleSubmit }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
 
   return (
     <main className="login-template-container">
@@ -29,7 +29,12 @@ const LoginTemplate: React.FC<Props> = ({ handleSubmit }) => {
           <h1 className="title">Hey, hello 👋</h1>
           <Form
             buttonName="Sign In"
-            handleSubmit={() => handleSubmit({ email, password })}
+            handleSubmit={() =>
+              handleSubmit({
+                email: email.current!.value,
+                password: password.current!.value,
+              })
+            }
             title="Sign In"
             link={{
               to: "/register",
@@ -38,18 +43,18 @@ const LoginTemplate: React.FC<Props> = ({ handleSubmit }) => {
             input={[
               {
                 type: "email",
-                handleChange: (value) => setEmail(value),
-                value: email,
+                value: email.current ? email.current.value : "",
                 name: "Email",
                 label: "Email",
                 errorMsg: "Email Invalid",
+                ref: email,
               },
               {
                 type: "password",
-                handleChange: (value) => setPassword(value),
-                value: password,
+                value: password.current ? password.current.value : "",
                 name: "password",
                 label: "Password",
+                ref: password,
               },
             ]}
           />

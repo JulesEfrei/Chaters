@@ -48,12 +48,12 @@ async function signIn(req, res) {
       return false;
     }
 
-    const verifPassword = bcrypt.compareSync(req.body.password, user.password);
-
     if (!user) {
       res.status(404).send({ error: "User not found" });
       return false;
     }
+
+    const verifPassword = bcrypt.compareSync(req.body.password, user.password);
 
     if (!verifPassword) {
       res.status(401).send({ error: "Password invalid!" });
