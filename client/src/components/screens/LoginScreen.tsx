@@ -3,10 +3,10 @@ import { ToastContainer } from "react-toastify";
 
 import { LoginOrganism } from "../organisms";
 
-const LoginScreen: React.FC = () => {
+const LoginScreen: React.FC<{ login: () => void }> = ({ login }) => {
   return (
     <>
-      <LoginOrganism />
+      <LoginOrganism loginState={login} />
       <ToastContainer />
     </>
   );

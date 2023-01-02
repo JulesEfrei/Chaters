@@ -5,9 +5,10 @@ $gray-background: #a5a5a5;
 $gray-color: #898989;
 $white-color: #fff;
 $white-color2: #f2f2f2;
-$white-bacground: #f6f6f6;
-// $info-color: #007ea7;
-$info-color: black;
+$white-background: #f6f6f6;
+$main-color: #69baf0;
+$secondary-color: #e0c7ff;
+$info-color: #007ea7;
 $danger-color: #c33149;
 $success-color: #0aaf41;
 
@@ -27,4 +28,13 @@ $primary-font: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin linearGradient($opacity: 1, $rotate: 90deg) {
+  background: rgb(224, 199, 255);
+  background: linear-gradient(
+    $rotate,
+    rgba(224, 199, 255, $opacity) 0%,
+    rgba(105, 186, 240, $opacity) 100%
+  );
 }

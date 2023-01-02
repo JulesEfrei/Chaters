@@ -2,11 +2,10 @@
 
 .molecule-conv-block {
   width: 100%;
-  border-bottom: 1px solid variables.$gray-color;
-  border-top: 1px solid variables.$gray-color;
 
   &:hover {
     cursor: pointer;
+    background-color: variables.$white-background;
   }
 
   h3 {
@@ -17,4 +16,8 @@
     font-family: variables.$primary-font;
     letter-spacing: 0.5px;
   }
+}
+
+.molecule-conv-block-active {
+  @include variables.linearGradient(0.4);
 }

@@ -3,10 +3,10 @@ import { ToastContainer } from "react-toastify";
 
 import { HomeOrganism } from "../organisms";
 
-const HomeScreen: React.FC = () => {
+const HomeScreen: React.FC<{ logout: () => void }> = ({ logout }) => {
   return (
     <>
-      <HomeOrganism />
+      <HomeOrganism logout={logout} />
       <ToastContainer />
     </>
   );

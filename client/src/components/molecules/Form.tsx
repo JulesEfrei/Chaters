@@ -5,10 +5,14 @@ import { Button, Input } from "../atoms/";
 import InputType from "../../types/inputType";
 import "./form.scss";
 
+interface FormInput extends InputType {
+  ref: React.RefObject<HTMLInputElement>;
+}
+
 interface Props {
   buttonName: string;
   handleSubmit: () => void;
-  input: Array<InputType>;
+  input: Array<FormInput>;
   title: string;
   link?: { to: string; title: string };
 }
@@ -28,8 +32,8 @@ const Form: React.FC<Props> = ({
           return (
             <Input
               type={elm.type}
-              handleChange={elm.handleChange}
-              value={elm.value}
+              value={elm.ref.current?.value}
+              ref={elm.ref}
               name={elm.name}
               placeholder={elm.placeholder}
               label={elm.label}

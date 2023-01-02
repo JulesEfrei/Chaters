@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useCallback } from "react";
 import { io } from "socket.io-client";
 import convData from "../../types/convDataType";
 import msgData from "../../types/msgType";
 
 import { HomeTemplate } from "../Templates/";
 
-const HomeOrganism: React.FC = () => {
+const HomeOrganism: React.FC<{ logout: () => void }> = ({ logout }) => {
   let [actualMsgList, setActualMsgList] = useState<msgData[]>([]);
   const [actualConv, setActualConv] = useState<convData>({});
   const [conv, setConv] = useState<
@@ -53,8 +53,6 @@ const HomeOrganism: React.FC = () => {
     });
 
     const res = await req.json();
-
-    console.log(res);
 
     addConv(res);
     const temp = [
@@ -128,6 +126,7 @@ const HomeOrganism: React.FC = () => {
       actualConv={actualConv}
       msgList={actualMsgList}
       send={(msg: msgData) => sendMsg(msg)}
+      logout={logout}
     />
   );
 };

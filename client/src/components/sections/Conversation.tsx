@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import "./conversation.scss";
 import { Msg } from "../molecules/";
 import msgType from "../../types/msgType";
 import convData from "../../types/convDataType";
-import { send } from "process";
-import { VoidExpression } from "typescript";
+import { IconButton } from "../atoms";
 
 interface Props {
   msgList: msgType[];
@@ -13,55 +12,77 @@ interface Props {
 }
 
 const Conversation: React.FC<Props> = ({ msgList, sendMsg, convData }) => {
-  const [value, setValue] = useState("");
+  const inputValue = useRef<HTMLInputElement>(null);
 
   const send: () => void = () => {
-    if (value !== "") {
-      sendMsg({
-        sender: JSON.parse(localStorage.getItem("data")!).email,
-        content: value,
-        receiver:
-          convData.user1 == JSON.parse(localStorage.getItem("data")!).email
-            ? convData.user2!
-            : convData.user1!,
-        convId: convData.convId!,
-      });
-      setValue("");
+    if (inputValue.current) {
+      console.log(inputValue.current.value);
+      if (inputValue.current.value !== "") {
+        sendMsg({
+          sender: JSON.parse(localStorage.getItem("data")!).email,
+          content: inputValue.current.value,
+          receiver:
+            convData.user1 === JSON.parse(localStorage.getItem("data")!).email
+              ? convData.user2!
+              : convData.user1!,
+          convId: convData.convId!,
+        });
+        inputValue.current.value = "";
+      } else {
+        return;
+      }
     } else {
-      console.log("NON");
+      console.log("No current");
     }
   };
 
+  const anchorScrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (anchorScrollRef.current) {
+      anchorScrollRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "end",
+      });
+    }
+  };
+
+  handleScroll();
+
   return (
     <section className="section-conversation">
-      <div className="msg-wrapper">
-        {msgList.length !== 0
-          ? msgList.map((elm, index) => {
-              return (
-                <Msg
-                  sender={elm.sender}
-                  content={elm.content}
-                  className={
-                    elm.sender !==
-                    JSON.parse(localStorage.getItem("data")!).email
-                      ? "msg-received"
-                      : "msg-sended"
-                  }
-                  date={elm.date!}
-                  key={`${elm.date}-msg-${index}`}
-                />
-              );
-            })
-          : null}
+      <div className="scrolling-section">
+        <div className="msg-wrapper">
+          {msgList.length !== 0
+            ? msgList.map((elm, index) => {
+                return (
+                  <Msg
+                    sender={elm.sender}
+                    content={elm.content}
+                    className={
+                      elm.sender !==
+                      JSON.parse(localStorage.getItem("data")!).email
+                        ? "msg-received"
+                        : "msg-sended"
+                    }
+                    date={elm.date!}
+                    key={`${elm.date}-msg-${index}`}
+                  />
+                );
+              })
+            : null}
+        </div>
+        <div ref={anchorScrollRef} id="anchor-scroll"></div>
       </div>
       <div className="input-container">
         <input
           type="text"
           placeholder="Start chatting"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          // value={inputValue.current.value}
+          ref={inputValue}
         />
-        <button onClick={() => send()}>Send</button>
+        <IconButton onClick={() => send()} icon="send.png" />
       </div>
     </section>
   );
