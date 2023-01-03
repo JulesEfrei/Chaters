@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./conversation.scss";
 import { Msg } from "../molecules/";
 import msgType from "../../types/msgType";
@@ -15,18 +15,24 @@ interface Props {
 const Conversation: React.FC<Props> = ({ sendMsg, convData }) => {
   const inputValue = useRef<HTMLInputElement>(null);
 
-  const fetchMsgList: msgData[] = useFetch(
-    `http://localhost:8080/msg/${convData.convId}`
-  ).response;
+  const {
+    response,
+    error,
+    isLoading,
+  }: {
+    response: msgData[];
+    error: Error;
+    isLoading: Boolean;
+  } = useFetch(`http://localhost:8080/msg/${convData.convId}`);
 
-  let msgList = fetchMsgList;
+  const [socketMsgList, setSocketMsgList] = useState<msgData[]>([]);
+  let msgList = !isLoading ? response.concat(socketMsgList) : [];
 
   console.log("Conversation");
 
   const send: () => void = () => {
     if (inputValue.current) {
       if (inputValue.current.value !== "") {
-        console.log(inputValue.current.value);
         const msg = {
           sender: JSON.parse(localStorage.getItem("data")!).email,
           content: inputValue.current.value,
@@ -37,7 +43,7 @@ const Conversation: React.FC<Props> = ({ sendMsg, convData }) => {
           convId: convData.convId!,
         };
         sendMsg(msg);
-        msgList = [...msgList, msg];
+        setSocketMsgList((curr) => [...curr, msg]);
         inputValue.current.value = "";
       } else {
         return;
@@ -66,26 +72,28 @@ const Conversation: React.FC<Props> = ({ sendMsg, convData }) => {
     <section className="section-conversation">
       <div className="scrolling-section">
         <div className="msg-wrapper">
-          {msgList !== null
-            ? msgList.length !== 0
-              ? msgList.map((elm, index) => {
-                  return (
-                    <Msg
-                      sender={elm.sender}
-                      content={elm.content}
-                      className={
-                        elm.sender !==
-                        JSON.parse(localStorage.getItem("data")!).email
-                          ? "msg-received"
-                          : "msg-sended"
-                      }
-                      date={elm.date!}
-                      key={`${elm.date}-msg-${index}`}
-                    />
-                  );
-                })
-              : null
-            : null}
+          {!error ? (
+            msgList.length !== 0 ? (
+              msgList.map((elm, index) => {
+                return (
+                  <Msg
+                    sender={elm.sender}
+                    content={elm.content}
+                    className={
+                      elm.sender !==
+                      JSON.parse(localStorage.getItem("data")!).email
+                        ? "msg-received"
+                        : "msg-sended"
+                    }
+                    date={elm.date!}
+                    key={`${elm.date}-msg-${index}`}
+                  />
+                );
+              })
+            ) : null
+          ) : (
+            <p>Error Sorry !</p>
+          )}
         </div>
         <div ref={anchorScrollRef} id="anchor-scroll"></div>
       </div>

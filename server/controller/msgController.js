@@ -5,7 +5,7 @@ async function getMsg(req, res) {
     const msg = await MsgModel.find({ convId: req.params.convId })
       .sort({ createdAt: -1 })
       .limit(20);
-    res.status(200).send(msg);
+    res.status(200).send(msg.reverse());
   } catch (err) {
     res.status(400).send({ error: "An error occured" });
   }

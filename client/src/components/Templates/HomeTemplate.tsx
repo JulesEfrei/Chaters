@@ -13,6 +13,8 @@ interface Props {
 const HomeTemplate: React.FC<Props> = ({ logout, send, room }) => {
   const [actualConv, setActualConv] = useState<convData>({}); //Only State of the component
 
+  console.log("HomeTemplate");
+
   let convList: { convId: string; user1: string; user2: string }[] = JSON.parse(
     localStorage.getItem("conversation")!
   )

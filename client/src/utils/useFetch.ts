@@ -13,14 +13,14 @@ const useFetch: (
 ) => output = (url, method = "GET", body) => {
   const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState<any>(null);
-  let isLoading = false;
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   useEffect(() => {
     //We create a AbortController
     const controller = new AbortController();
 
     const fetchData = async () => {
-      isLoading = true;
+      setIsLoading(true);
 
       try {
         //Classic fetch method
@@ -36,12 +36,12 @@ const useFetch: (
 
         const res = await req.json();
 
-        isLoading = false;
+        setIsLoading(false);
         setResponse(res);
       } catch (err: unknown) {
         if (err instanceof Error && err.name !== "AbortError") {
           setError(err);
-          isLoading = false;
+          setIsLoading(false);
         }
       }
     };
@@ -51,7 +51,12 @@ const useFetch: (
     }
 
     //Abort fetch request when the component is unMounted
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+      setIsLoading(true);
+      setError(null);
+      setResponse(null);
+    };
   }, [url, method, body]);
 
   return { response, error, isLoading };
