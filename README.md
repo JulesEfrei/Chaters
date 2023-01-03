@@ -126,7 +126,7 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To test the application open two browser windows and go to the site. Create two accounts and start a conversation with the email of the second account. Try to send you a message
+To test the application open two browser windows (at least one in private browsing) and go to the site. Create two accounts and start a conversation with the email of the second account. Try to send you a message
 
 To test the API separately follow this [Documentation](https://github.com/JulesEfrei/Chaters/blob/main/server/README.md)
 
