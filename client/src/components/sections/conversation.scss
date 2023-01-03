@@ -2,7 +2,6 @@
 
 .section-conversation {
   position: relative;
-  z-index: 100;
   width: calc(100% - 279px);
   height: calc(100vh - 72px);
   background-color: variables.$white-background;
@@ -23,7 +22,7 @@
   .msg-wrapper {
     display: flex;
     justify-content: flex-end;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .input-container {

@@ -21,6 +21,8 @@ const ConvBar: React.FC<Props> = ({
   const [show, setShow] = useState<Boolean>(false);
   const mail = useRef<HTMLInputElement>(null);
 
+  console.log("ConvBar");
+
   const handleClick = () => {
     if (mail.current) {
       if (mail.current.value !== "") {
@@ -52,7 +54,11 @@ const ConvBar: React.FC<Props> = ({
                     ? elm.user2!
                     : elm.user1!
                 }
-                selected={actualConv === elm ? true : false}
+                selected={
+                  Object.values(actualConv).join() === Object.values(elm).join()
+                    ? true
+                    : false
+                }
                 onClick={() => onClick(elm)}
                 key={elm.convId}
               />

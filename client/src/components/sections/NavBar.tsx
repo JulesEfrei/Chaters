@@ -19,6 +19,8 @@ const NavBar: React.FC<Props> = ({ logoutState }) => {
 
   const [showUser, setShowUser] = useState<Boolean>(false);
 
+  console.log("NavBar");
+
   return (
     <section className="section-navbar">
       <div className="top">

@@ -2,7 +2,9 @@ const MsgModel = require("../model/msgModel");
 
 async function getMsg(req, res) {
   try {
-    const msg = await MsgModel.find({ convId: req.params.convId }).limit(20);
+    const msg = await MsgModel.find({ convId: req.params.convId })
+      .sort({ createdAt: -1 })
+      .limit(20);
     res.status(200).send(msg);
   } catch (err) {
     res.status(400).send({ error: "An error occured" });

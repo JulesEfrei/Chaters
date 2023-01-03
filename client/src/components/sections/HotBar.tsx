@@ -9,6 +9,7 @@ interface Props {
 
 const HotBar: React.FC<Props> = ({ name = "" }) => {
   const navigation = useNavigate();
+  console.log("HotBar");
 
   return (
     <section className="section-hot-bar">
