@@ -8,21 +8,30 @@ interface output {
 
 const useFetch: (
   url: string,
-  method?: "GET" | "POST",
+  method?: "GET" | "POST" | "PATCH",
   body?: BodyInit
 ) => output = (url, method = "GET", body) => {
   const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
+  console.log("UseFetch");
+
   useEffect(() => {
     //We create a AbortController
     const controller = new AbortController();
 
+    console.log("useEffect");
+
     const fetchData = async () => {
-      setIsLoading(true);
+      //Re-render 2 fois après un changement de conv
+      // setIsLoading(true);
+
+      console.log("FetchData");
 
       try {
+        console.log("TRY");
+
         //Classic fetch method
         const req = await fetch(url, {
           signal: controller.signal,
@@ -36,12 +45,13 @@ const useFetch: (
 
         const res = await req.json();
 
-        setIsLoading(false);
+        //re-render 2 fois tout le temps
+        // setIsLoading(false);
         setResponse(res);
       } catch (err: unknown) {
         if (err instanceof Error && err.name !== "AbortError") {
           setError(err);
-          setIsLoading(false);
+          // setIsLoading(false);
         }
       }
     };

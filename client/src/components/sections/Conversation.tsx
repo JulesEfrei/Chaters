@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import "./conversation.scss";
 import { Msg } from "../molecules/";
 import msgType from "../../types/msgType";
@@ -6,13 +12,17 @@ import convData from "../../types/convDataType";
 import { IconButton } from "../atoms";
 import useFetch from "../../utils/useFetch";
 import msgData from "../../types/msgType";
+import { Socket } from "socket.io-client";
 
 interface Props {
   sendMsg: (msg: msgType) => void;
   convData: convData;
+  socket: Socket;
 }
 
-const Conversation: React.FC<Props> = ({ sendMsg, convData }) => {
+const Conversation: React.FC<Props> = ({ sendMsg, convData, socket }) => {
+  console.log("Conversation");
+
   const inputValue = useRef<HTMLInputElement>(null);
 
   const {
@@ -25,10 +35,19 @@ const Conversation: React.FC<Props> = ({ sendMsg, convData }) => {
     isLoading: Boolean;
   } = useFetch(`http://localhost:8080/msg/${convData.convId}`);
 
-  const [socketMsgList, setSocketMsgList] = useState<msgData[]>([]);
-  let msgList = !isLoading ? response.concat(socketMsgList) : [];
+  const [socketMsg, setSocketMsg] = useState<msgData[]>([]);
 
-  console.log("Conversation");
+  socket.on("msg", (data) => {
+    console.log("Message received!");
+    setSocketMsg((curr) => [...curr, data]);
+    console.log(socketMsg);
+  });
+
+  // const msgList = useMemo(() => {
+  //   return !isLoading ? response.concat(socketMsg) : [];
+  // }, [response, socketMsg]);
+
+  const msgList: msgData[] = [];
 
   const send: () => void = () => {
     if (inputValue.current) {
@@ -43,7 +62,6 @@ const Conversation: React.FC<Props> = ({ sendMsg, convData }) => {
           convId: convData.convId!,
         };
         sendMsg(msg);
-        setSocketMsgList((curr) => [...curr, msg]);
         inputValue.current.value = "";
       } else {
         return;
@@ -73,23 +91,25 @@ const Conversation: React.FC<Props> = ({ sendMsg, convData }) => {
       <div className="scrolling-section">
         <div className="msg-wrapper">
           {!error ? (
-            msgList.length !== 0 ? (
-              msgList.map((elm, index) => {
-                return (
-                  <Msg
-                    sender={elm.sender}
-                    content={elm.content}
-                    className={
-                      elm.sender !==
-                      JSON.parse(localStorage.getItem("data")!).email
-                        ? "msg-received"
-                        : "msg-sended"
-                    }
-                    date={elm.date!}
-                    key={`${elm.date}-msg-${index}`}
-                  />
-                );
-              })
+            msgList !== null ? (
+              msgList.length !== 0 ? (
+                msgList.map((elm, index) => {
+                  return (
+                    <Msg
+                      sender={elm.sender}
+                      content={elm.content}
+                      className={
+                        elm.sender !==
+                        JSON.parse(localStorage.getItem("data")!).email
+                          ? "msg-received"
+                          : "msg-sended"
+                      }
+                      date={elm.date!}
+                      key={`${elm.date}-msg-${index}`}
+                    />
+                  );
+                })
+              ) : null
             ) : null
           ) : (
             <p>Error Sorry !</p>

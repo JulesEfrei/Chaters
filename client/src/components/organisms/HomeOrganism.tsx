@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { io } from "socket.io-client";
 import convData from "../../types/convDataType";
+import msgData from "../../types/msgType";
 import { HomeTemplate } from "../Templates/";
 
 const HomeOrganism: React.FC<{ logout: () => void }> = ({ logout }) => {
   //Socket.io
   const socket = io("http://localhost:8081"); //API Url
+  // const [msg, setMsg] = useState<msgData[]>([]);
 
   //Socket.io event
   socket.on("connect", () => {
     console.log("Connected from Client : ", socket.id);
 
     // socket.on("msg", (data) => {
-    //   updateMsgList();
+    // console.log(data);
+    // setMsg((curr) => [...curr, data]);
     // });
   });
 
   //Change room in socket.io (=> Change conversation in socket.io)
   const roomChange: (roomName: string) => void = (roomName: string) => {
-    console.log("Change ROOM");
+    console.log("Changement de room Client => ", roomName);
     socket.emit("change-room", roomName);
   };
 
@@ -32,6 +35,7 @@ const HomeOrganism: React.FC<{ logout: () => void }> = ({ logout }) => {
       logout={logout}
       send={(msg: convData, convId: string) => sendMsg(msg, convId)}
       room={(roomName: string) => roomChange(roomName)}
+      socket={socket}
     />
   );
 };

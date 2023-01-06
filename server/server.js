@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
   //New-msg
   socket.on("new-msg", async (data) => {
     console.log("New-msg triggers !");
-    socket.to(data.room).emit("msg", {
+    io.to(data.room).emit("msg", {
       sender: data.sender,
       receiver: data.receiver,
       content: data.content,
@@ -48,6 +48,7 @@ io.on("connection", (socket) => {
 
   //Change room
   socket.on("change-room", (roomName) => {
+    console.log("Changement de room Server => ", roomName);
     socket.join(roomName);
   });
 });
